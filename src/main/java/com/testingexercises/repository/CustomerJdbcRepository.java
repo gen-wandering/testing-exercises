@@ -23,7 +23,7 @@ public class CustomerJdbcRepository {
     private boolean foundById(int id) {
         String idSql = """
                 SELECT *
-                FROM full_stack.customers
+                FROM testing.customers
                 WHERE id = ?;
                 """;
         return !jdbcTemplate.query(idSql, customerRowMapper, id).isEmpty();
@@ -32,7 +32,7 @@ public class CustomerJdbcRepository {
     private boolean notFoundByEmail(String email) {
         String emailSql = """
                 SELECT count(*)
-                FROM full_stack.customers
+                FROM testing.customers
                 WHERE email = ?;
                 """;
         Integer amount = jdbcTemplate.queryForObject(emailSql, Integer.class, email);
@@ -42,7 +42,7 @@ public class CustomerJdbcRepository {
     public Iterable<Customer> getCustomers() {
         String sql = """
                 SELECT *
-                FROM full_stack.customers;
+                FROM testing.customers;
                 """;
         return jdbcTemplate.query(sql, customerRowMapper);
     }
@@ -50,7 +50,7 @@ public class CustomerJdbcRepository {
     public Customer getCustomer(int customerId) {
         String sql = """
                 SELECT *
-                FROM full_stack.customers
+                FROM testing.customers
                 WHERE id = ?;
                 """;
         var res = jdbcTemplate.query(sql, customerRowMapper, customerId);
@@ -63,7 +63,7 @@ public class CustomerJdbcRepository {
 
     public boolean addNewCustomer(Customer customer) {
         String sql = """
-                INSERT INTO full_stack.customers (first_name, last_name, email)
+                INSERT INTO testing.customers (first_name, last_name, email)
                 VALUES (?, ?, ?);
                 """;
         if (notFoundByEmail(customer.getEmail())) {
@@ -78,7 +78,7 @@ public class CustomerJdbcRepository {
     }
 
     public boolean updateCustomer(Customer customer) {
-        String update = "UPDATE full_stack.customers SET ";
+        String update = "UPDATE testing.customers SET ";
         String where = " WHERE id=";
         StringBuilder fieldsToUpdate = new StringBuilder();
 
@@ -115,7 +115,7 @@ public class CustomerJdbcRepository {
 
     public boolean deleteCustomer(int customerId) {
         String sql = """
-                DELETE FROM full_stack.customers
+                DELETE FROM testing.customers
                 WHERE id = ?;
                 """;
         if (foundById(customerId)) {
