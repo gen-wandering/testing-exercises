@@ -6,5 +6,5 @@
 * **Service tests (**[`customsecurity`](src/test/java/com/testingexercises/service)**)**\
   Tests for service layer.<br/><br/>
 
-* **Service tests (**[`customsecurity`](src/test/java/com/testingexercises/controller)**)**\
+* **Integration tests (**[`customsecurity`](src/test/java/com/testingexercises/controller)**)**\
   Integration tests for controller using WebTestClient and Testcontainers.
